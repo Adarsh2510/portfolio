@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Banner } from "./atoms/banner";
 import Header from "./atoms/header";
 import './globals.css'
 
@@ -7,6 +8,7 @@ export default function Home() {
     <main>
       <div>
         <Header/>
+        <Banner/>
       </div>
     </main>
   );

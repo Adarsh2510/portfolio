@@ -9,7 +9,7 @@ export const headerContainer = css({
     gap: '1rem',
     alignItems: 'center',
     justifyContent:'space-between',
-    padding: '1rem',
+    padding: '2rem',
     flexWrap: 'wrap',
 });
 

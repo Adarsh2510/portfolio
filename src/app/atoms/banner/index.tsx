@@ -15,8 +15,7 @@ export const Banner = () => {
             <p>Based out of Gurugram, India 🇮🇳</p>
         </div>
         <div className={bannerImage}>
-        <Image src="/bannerImage.jpg" alt="banner" fill={true}
-              />
+        <Image src="/bannerImage.jpg" alt="banner" fill/>
         </div>
     </div>
   );

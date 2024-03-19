@@ -8,8 +8,8 @@ const Header = () => {
       <span className={headerLogo}>adarsh trivedi</span>
       <div className={headerContactsContainer}>
         <span>Let's connect</span>
-        {SOCIAL_MEDIA_LINKS.map((item, key) => {
-          const { SVGElement, url } = item;
+        {SOCIAL_MEDIA_LINKS.map((linkData, key) => {
+          const { SVGElement, url } = linkData;
           return (
             <Link key={key} prefetch={false} href={url} target="_blank">
               <SVGElement />

@@ -23,5 +23,4 @@ export const headerContactsContainer = css({
     justifyItems:'flex-end',
     gap: '1rem',
     flexWrap: 'wrap',
-
 });

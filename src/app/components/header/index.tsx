@@ -7,7 +7,7 @@ const Header = () => {
     <div className={headerContainer}>
       <span className={headerLogo}>adarsh trivedi</span>
       <div className={headerContactsContainer}>
-        <span>Let's connect</span>
+        <span>Let&apos;s connect</span>
         {SOCIAL_MEDIA_LINKS.map((linkData, key) => {
           const { SVGElement, url } = linkData;
           return (

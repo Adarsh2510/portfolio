@@ -1,8 +1,9 @@
+import { CapgeminiLogo, HeadoutLogo, MorganLogo } from "assets/svgIcons/experiencesLogo";
 import {LinkedinIcon } from "assets/svgIcons/socialLinks";
 
 export const EXPERIENCES_DATA = [
     {
-        SVGElement : LinkedinIcon,
+        SVGElement : HeadoutLogo,
         url: "https://in.linkedin.com/in/adarsh2510",
         role: "Headout, Inc - SET",
         date: "Nov 2022, Present",
@@ -12,7 +13,7 @@ export const EXPERIENCES_DATA = [
         ]
     },
     {
-        SVGElement : LinkedinIcon,
+        SVGElement : MorganLogo,
         url: "https://in.linkedin.com/in/adarsh2510",
         role: "Capgemini <-> Morgan Stanley - SWE",
         date: "July 2021 - Nov 2022",
@@ -22,7 +23,7 @@ export const EXPERIENCES_DATA = [
         ]
     },
     {
-        SVGElement : LinkedinIcon,
+        SVGElement : CapgeminiLogo,
         url: "https://in.linkedin.com/in/adarsh2510",
         role: "Capgemini - Intern",
         date: "March 2021 - June 2022",

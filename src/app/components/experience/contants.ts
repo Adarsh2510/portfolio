@@ -35,5 +35,15 @@ export const EXPERIENCES_DATA = [
             "Engineered a Tata Sky portal clone, incorporating features such as recharge creation, account management, package selection, and an admin portal"
         ]
     },
+    {
+        SVGElement : null,
+        url: "https://in.linkedin.com/in/adarsh2510",
+        role: "Freelance Web developer",
+        date: "September 2018 - December 2018",
+        experienceHighlights: [
+            "Developed, hosted, and managed a customer-engaging website to boost client online visibility",
+            "Skilled in designing, maintaining, and integrating MySQL databases to efficiently meet data requirements"
+        ]
+    }
 ]
 export default EXPERIENCES_DATA;

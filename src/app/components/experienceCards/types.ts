@@ -1,6 +1,6 @@
 
 export type TExperienceCard = {
-  SVGElement: any;
+  SVGElement: any | null;
   url: string;
   role: string;
   date: string;

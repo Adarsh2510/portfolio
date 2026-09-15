@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArticlesCarousel } from "./components/articlesCarousel";
 import Banner from "./components/banner";
 import Experience from "./components/experience";
 import { homePage } from "./page.styles";
@@ -45,15 +46,7 @@ export default function Home() {
           <h2 id="writing-heading" className={styles.sectionTitle}>
             Writing
           </h2>
-          <div className={styles.writingRail} aria-label="Published articles">
-            {publishedPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.writingCard}>
-                <p>{post.topic} · {post.readingTime}</p>
-                <h3>{post.title}</h3>
-                <p>{post.description}</p>
-              </Link>
-            ))}
-          </div>
+          <ArticlesCarousel posts={publishedPosts} />
         </section>
       ) : null}
 

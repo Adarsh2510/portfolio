@@ -39,15 +39,14 @@ export const posts = [
         id: "executive-summary",
         title: "Executive summary",
         html: `
-          <p>This was a small performance fix in a CMS admin UI. Editors needed to select pages in places like visual-diff tooling and rich-text internal links. The generic selector was too slow for that flow, especially when searching by page UID.</p>
+          <p>This was a small performance fix in a CMS admin UI. Editors needed to select pages by UID. The generic selector was too slow for that flow, especially when searching through a larger pages collection.</p>
           <p>The change replaced the default relationship selector with a custom page selector. It fetched only the fields the UI needed, debounced input, and changed the search from a broad match to an indexed prefix range.</p>
           <table>
             <thead><tr><th>Area</th><th>Before</th><th>After</th></tr></thead>
             <tbody>
               <tr><td>UI</td><td>Generic relationship selector</td><td>Purpose-built page selector</td></tr>
-              <tr><td>Payload</td><td>More data than the dropdown needed</td><td>Projection for only <code>id</code> and <code>uid</code></td></tr>
-              <tr><td>Search</td><td><code>uid like input</code></td><td><code>uid &gt;= input</code> and <code>uid &lt; input + ￿</code></td></tr>
-              <tr><td>Measured locally</td><td>About 40–60ms API response</td><td>About 4–6ms API response</td></tr>
+              <tr><td>Payload</td><td>More data than the dropdown needed</td><td>Projection for only the option label and value</td></tr>
+              <tr><td>Search</td><td>Broad UID match</td><td>Lowercase UID prefix range</td></tr>
             </tbody>
           </table>
         `,
@@ -57,10 +56,10 @@ export const posts = [
         title: "Why the query shape mattered",
         html: `
           <p>A MongoDB B-tree index stores values in sorted order. That makes equality and range scans cheap: the database can seek to a starting point in the index and walk forward until the range ends.</p>
-          <p>That property is useful for prefix search. If a user types <code>par</code>, every UID starting with that prefix sits inside a range:</p>
+          <p>That property is useful for prefix search when the identifier format is constrained. For normalized lowercase ASCII-style UIDs under simple binary collation, if a user types <code>par</code>, matching UIDs can be queried as a range:</p>
           <pre><code>uid &gt;= "par"
 uid &lt;  "par￿"</code></pre>
-          <p>The upper bound uses a high Unicode sentinel so values that start with the prefix sort before it. It is not the only way to express prefix search, but it made the intent explicit: this dropdown is searching from the start of the UID, not anywhere inside it.</p>
+          <p>The upper bound uses a high Unicode sentinel. That is a convenient bound for this restricted identifier alphabet, not a universal Unicode prefix-search rule. The important part is the intent: this dropdown is searching from the start of a normalized UID, not anywhere inside it.</p>
           <p>That distinction is important. A contains-style regex can be convenient for users, but it often prevents the database from using the sorted index efficiently. The index is ordered by the beginning of the value; it cannot jump directly to “contains this substring somewhere.”</p>
         `,
       },
@@ -68,10 +67,9 @@ uid &lt;  "par￿"</code></pre>
         id: "what-changed-in-the-selector",
         title: "What changed in the selector",
         html: `
-          <p>The selector kept the UI simple. It debounced search input, queried the pages collection, and asked only for what the dropdown needed: <code>id</code> and <code>uid</code>.</p>
+          <p>The selector kept the UI simple. It debounced search input, queried the pages collection, and asked only for the option value and label the dropdown needed.</p>
           <pre><code>fields: ["id", "uid"]
-limit: 10
-locale: "en"</code></pre>
+limit: 10</code></pre>
           <p>The search condition changed to a bounded range:</p>
           <pre><code>where: input
   ? {
@@ -88,8 +86,7 @@ locale: "en"</code></pre>
         id: "what-i-checked",
         title: "What I checked",
         html: `
-          <p>The PR notes recorded a local response-time improvement from roughly 40–60ms to 4–6ms. They also noted that Mongo shell analysis examined around 10–15 documents, had near-zero execution time, and did not show rejected plans.</p>
-          <p>I would not publish those as universal numbers. They are local measurements from the dataset and machine used during the fix. The useful part is the method: compare the query plan before and after, not just the UI feeling faster.</p>
+          <p>The useful part is the method: compare the query plan before and after, not just the UI feeling faster. On representative data, validate the winning plan, keys examined, documents examined, and response shape.</p>
           <p>The checks worth keeping are:</p>
           <ul>
             <li>Does the winning plan use the UID index?</li>
@@ -101,10 +98,9 @@ locale: "en"</code></pre>
         `,
       },
       {
-        id: "where-it-was-used",
-        title: "Where it was used",
+        id: "scope",
+        title: "Scope",
         html: `
-          <p>The same selector was reused in two admin flows: a visual-diff page selector and rich-text internal link selection. That made the change more useful than a one-off optimization.</p>
           <p>I still kept the scope small. This was not a generic search framework. It was a specific selector for a known access pattern: editors search page UIDs by prefix and choose one or more pages.</p>
         `,
       },
@@ -125,7 +121,7 @@ locale: "en"</code></pre>
   },
   {
     slug: "ai-agent-component-migration",
-    status: "published",
+    status: "draft",
     title: "What I Learned Trying to Automate a Frontend Migration",
     description:
       "A practical case study on several LLM-agent migration workflows I tried, what failed, and the smaller operating model that worked better.",

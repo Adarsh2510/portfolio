@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ArticlesCarousel } from "@/app/components/articlesCarousel";
 import { publishedPosts } from "@/content/posts";
 import { blogPage } from "./styles";
 
@@ -24,15 +24,7 @@ export default function BlogPage() {
         Case studies and notes on frontend engineering, performance, migrations, and AI-assisted workflows.
       </p>
 
-      <div className={styles.grid}>
-        {publishedPosts.map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.card}>
-            <p className={styles.meta}>{post.topic} · {post.readingTime}</p>
-            <h2>{post.title}</h2>
-            <p>{post.description}</p>
-          </Link>
-        ))}
-      </div>
+      <ArticlesCarousel posts={publishedPosts} />
     </section>
   );
 }

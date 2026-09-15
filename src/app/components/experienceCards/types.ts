@@ -1,8 +1,10 @@
+import type { ComponentType } from "react";
 
 export type TExperienceCard = {
-  SVGElement: any | null;
-  url: string;
+  SVGElement: ComponentType | null;
+  company: string;
   role: string;
+  href?: string;
   date: string;
-  experienceHighlights: any[];
+  highlights: readonly string[];
 };

@@ -1,26 +1,73 @@
-import { css } from "styled-system/css";
+import { sva } from "styled-system/css";
 
-export const headerContainer = css({
-    display:'flex',
-    flexDir: 'row',
-    backgroundColor: '#f2f1ed',
-    height: 'auto',
-    minH:'3rem',
-    gap: '1rem',
-    alignItems: 'center',
-    justifyContent:'space-between',
-    padding: '2rem',
-    flexWrap: 'wrap',
-});
-
-
-export const headerLogo = css({
-    fontWeight:700,
-});
-
-export const headerContactsContainer = css({
-    display:'flex',
-    justifyItems:'flex-end',
-    gap: '1rem',
-    flexWrap: 'wrap',
+export const header = sva({
+  slots: ["skip", "root", "inner", "logo", "navList", "navLink", "socialList", "socialLink"],
+  base: {
+    skip: {
+      position: "fixed",
+      top: "1rem",
+      left: "1rem",
+      zIndex: 10,
+      transform: "translateY(-150%)",
+      background: "accent",
+      color: "canvas",
+      px: "gap",
+      py: "0.65rem",
+      borderRadius: "pill",
+      fontWeight: 700,
+      _focusVisible: { transform: "translateY(0)" },
+    },
+    root: {
+      borderBottom: "hairline solid token(colors.divider)",
+      background: "rgba(247, 248, 245, 0.92)",
+    },
+    inner: {
+      maxW: "content",
+      mx: "auto",
+      px: "pageX",
+      py: "1rem",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "gap",
+      flexWrap: "wrap",
+    },
+    logo: {
+      fontWeight: 800,
+      letterSpacing: "-0.03em",
+      textDecoration: "none",
+    },
+    navList: {
+      display: "flex",
+      alignItems: "center",
+      gap: { base: "0.75rem", md: "1.25rem" },
+      flexWrap: "wrap",
+      listStyle: "none",
+    },
+    navLink: {
+      color: "ink",
+      textDecoration: "none",
+      fontSize: "0.95rem",
+      _hover: { color: "accent" },
+    },
+    socialList: {
+      display: "flex",
+      alignItems: "center",
+      gap: "0.55rem",
+      listStyle: "none",
+    },
+    socialLink: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      w: "2rem",
+      h: "2rem",
+      border: "hairline solid token(colors.divider)",
+      borderRadius: "pill",
+      color: "ink",
+      textDecoration: "none",
+      _hover: { borderColor: "accent", color: "accent" },
+      "& svg": { width: "1.05rem", height: "1.05rem", fill: "currentColor" },
+    },
+  },
 });

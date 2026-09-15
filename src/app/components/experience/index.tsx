@@ -1,31 +1,31 @@
+import { experience } from "@/content/portfolio";
 import ExperienceCard from "../experienceCards";
-import EXPERIENCES_DATA from "./contants";
-import { experienceContainer, timelineContainer } from "./styles";
+import { getExperienceLogo } from "./contants";
+import { experienceSection } from "./styles";
 
 const Experience = () => {
+  const styles = experienceSection();
+
   return (
-    <div className={experienceContainer}>
-      <h2>Experience</h2>
+    <section id="about" className={styles.root} aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
       <p>
-        Been into multiple roles ranging from Quality assurance, Automations to
-        front-end Development, Having following timeline.
+        A concise timeline across frontend engineering, automation, and early freelance web work.
       </p>
-      <div className={timelineContainer}>
-        {EXPERIENCES_DATA.map((experienceData, key) => {
-          const { SVGElement, url, role, date, experienceHighlights } = experienceData;
-          return (
-            <ExperienceCard
-              key={key}
-              SVGElement={SVGElement}
-              url={url}
-              role={role}
-              date={date}
-              experienceHighlights={experienceHighlights}
-            />
-          );
-        })}
+      <div className={styles.timeline}>
+        {experience.map((item) => (
+          <ExperienceCard
+            key={`${item.company}-${item.role}`}
+            SVGElement={getExperienceLogo(item.company)}
+            company={item.company}
+            role={item.role}
+            href={"href" in item ? item.href : undefined}
+            date={item.date}
+            highlights={item.highlights}
+          />
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 

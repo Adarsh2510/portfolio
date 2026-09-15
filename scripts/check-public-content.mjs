@@ -13,8 +13,15 @@ const assert = (condition, message) => {
 };
 
 assert(
-  /slug: "ai-agent-component-migration",[\s\S]*?status: "draft"/.test(posts),
-  "AI migration article must stay draft until its first-person claims are verified.",
+  /slug: "ai-agent-component-migration",[\s\S]*?status: "published"/.test(posts),
+  "AI migration article must be published.",
+);
+
+assert(
+  /slug: "mongodb-btree-prefix-search",[\s\S]*?publishedAt: "2025-07-10"/.test(posts) &&
+    /slug: "ai-agent-component-migration",[\s\S]*?publishedAt: "2025-08-01"/.test(posts) &&
+    /slug: "agent-skills-i-use",[\s\S]*?publishedAt: "2025-08-20"/.test(posts),
+  "Listed posts must keep MongoDB first, AI migration second, and agent skills third.",
 );
 
 assert(

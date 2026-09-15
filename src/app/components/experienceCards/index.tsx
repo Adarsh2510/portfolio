@@ -1,34 +1,34 @@
 import Link from "next/link";
-import { card, cardBody, cardHeader, companyLogo, roleTitle, dateBadge } from "./styles";
+import { experienceCard } from "./styles";
 import { TExperienceCard } from "./types";
 
 const ExperienceCard = (props: TExperienceCard) => {
   const { SVGElement, url, role, date, experienceHighlights } = props;
-  
+  const styles = experienceCard();
+  const logo = SVGElement ? <SVGElement /> : <span aria-hidden="true">•</span>;
+
   return (
-    <div className={card}>
-      <div className={cardHeader}>
-        {SVGElement ? (
-          <Link prefetch={false} href={url} target="_blank" className={companyLogo}>
-            <SVGElement />
+    <article className={styles.root}>
+      <div className={styles.header}>
+        {url ? (
+          <Link prefetch={false} href={url} target="_blank" rel="noreferrer" className={styles.logo} aria-label={role}>
+            {logo}
           </Link>
         ) : (
-          <div className={companyLogo}>
-            <div style={{ width: '24px', height: '24px', background: 'rgba(255, 255, 255, 0.3)', borderRadius: '4px' }} />
-          </div>
+          <div className={styles.logo}>{logo}</div>
         )}
-        <span className={roleTitle}>{role}</span>
-        <span className={dateBadge}>{date}</span>
+        <h3 className={styles.role}>{role}</h3>
+        <p className={styles.date}>{date}</p>
       </div>
-      
-      <div className={cardBody}>
+
+      <div className={styles.body}>
         <ul>
-          {experienceHighlights.map((highlight, key) => (
-            <li key={key}>{highlight}</li>
+          {experienceHighlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
           ))}
         </ul>
       </div>
-    </div>
+    </article>
   );
 };
 

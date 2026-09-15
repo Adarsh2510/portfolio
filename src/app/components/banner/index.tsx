@@ -1,23 +1,28 @@
 import Image from "next/image";
-import Link from "next/link";
-import { css } from "styled-system/css";
-import { bannerContainer, bannerImage, bannerText } from "./styles";
+import { intro } from "@/content/portfolio";
+import { banner } from "./styles";
 
 export const Banner = () => {
+  const styles = banner();
+
   return (
-    <div className={bannerContainer}>
-        <div className={bannerText}>
-            <h1 className={css({
-                fontSize:'5rem',
-            })}>Hi,</h1>
-            <h2>Myself Adarsh Trivedi</h2>
-            <p>Working as a Software Engineer <Link href={"https://www.headout.com/"}> @Headout</Link></p>
-            <p>Based out of Gurugram, India 🇮🇳</p>
-        </div>
-        <div className={bannerImage}>
-        <Image src="/bannerImage.jpg" alt="banner" fill/>
-        </div>
-    </div>
+    <section className={styles.root} aria-labelledby="intro-heading">
+      <div className={styles.text}>
+        <h1>{intro.greeting}</h1>
+        <h2 id="intro-heading">{intro.nameLine}</h2>
+        <p>{intro.roleLine}</p>
+        <p>{intro.locationLine}</p>
+      </div>
+      <div className={styles.image}>
+        <Image
+          src="/bannerImage.jpg"
+          alt="Illustration of a developer working on a laptop"
+          fill
+          sizes="(min-width: 1024px) 50vw, 90vw"
+          priority
+        />
+      </div>
+    </section>
   );
 };
 

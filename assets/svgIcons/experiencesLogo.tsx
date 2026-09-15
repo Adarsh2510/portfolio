@@ -144,7 +144,7 @@ export const MorganLogo = () => (
     width="30"
     height="30"
     viewBox="0 0 100 100"
-    enable-background="new 0 0 100 100"
+    enableBackground="new 0 0 100 100"
     // xml:space="preserve"
   >
     <path
@@ -652,7 +652,7 @@ export const CapgeminiLogo = () => (
     width="30"
     height="30"
     viewBox="0 0 100 100"
-    enable-background="new 0 0 200 200"
+    enableBackground="new 0 0 200 200"
     xml-space="preserve"
   >
     <path

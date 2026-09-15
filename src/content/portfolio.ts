@@ -29,7 +29,7 @@ export const selectedWork = [
 
 export const experience = [
   {
-    company: "Travel marketplace",
+    company: "Headout",
     role: "Senior Frontend Engineer",
     date: "Nov 2022 — Present",
     href: "https://www.headout.com/",

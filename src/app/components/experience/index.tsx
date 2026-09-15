@@ -1,5 +1,6 @@
+import { experience } from "@/content/portfolio";
 import ExperienceCard from "../experienceCards";
-import EXPERIENCES_DATA from "./contants";
+import { getExperienceLogo } from "./contants";
 import { experienceSection } from "./styles";
 
 const Experience = () => {
@@ -12,19 +13,17 @@ const Experience = () => {
         A concise timeline across frontend engineering, automation, and early freelance web work.
       </p>
       <div className={styles.timeline}>
-        {EXPERIENCES_DATA.map((experienceData) => {
-          const { SVGElement, url, role, date, experienceHighlights } = experienceData;
-          return (
-            <ExperienceCard
-              key={role}
-              SVGElement={SVGElement}
-              url={url}
-              role={role}
-              date={date}
-              experienceHighlights={experienceHighlights}
-            />
-          );
-        })}
+        {experience.map((item) => (
+          <ExperienceCard
+            key={`${item.company}-${item.role}`}
+            SVGElement={getExperienceLogo(item.company)}
+            company={item.company}
+            role={item.role}
+            href={"href" in item ? item.href : undefined}
+            date={item.date}
+            highlights={item.highlights}
+          />
+        ))}
       </div>
     </section>
   );

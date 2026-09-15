@@ -17,6 +17,7 @@ export type Post = {
   standfirst: string;
   takeaway: string;
   sections: PostSection[];
+  listed?: boolean;
 };
 
 export const posts = [
@@ -45,7 +46,7 @@ export const posts = [
             <thead><tr><th>Area</th><th>Before</th><th>After</th></tr></thead>
             <tbody>
               <tr><td>UI</td><td>Generic relationship selector</td><td>Purpose-built page selector</td></tr>
-              <tr><td>Payload</td><td>More data than the dropdown needed</td><td>Projection for only the option label and value</td></tr>
+              <tr><td>Response</td><td>More data than the dropdown needed</td><td>Projection for only the option label and value</td></tr>
               <tr><td>Search</td><td>Broad UID match</td><td>Lowercase UID prefix range</td></tr>
             </tbody>
           </table>
@@ -119,6 +120,250 @@ limit: 10</code></pre>
       },
     ],
   },
+
+  {
+    slug: "agent-skills-i-use",
+    status: "published",
+    title: "Agent Skills I Actually Use",
+    description:
+      "A short note on the reusable agent skills I keep reaching for: pressure-testing, simplicity checks, peer review, token cleanup, and project kickoff.",
+    topic: "AI-assisted engineering",
+    publishedAt: "2025-08-20",
+    readingTime: "6 min read",
+    standfirst:
+      "I do not use agent skills as magic commands. I use them as small operating procedures: ask harder questions, keep work simple, review with receipts, normalize design tokens, and start projects with less drift.",
+    takeaway:
+      "The useful skill is not the prompt itself. It is the repeatable boundary it creates: when to ask questions, what evidence is required, and what kind of output is acceptable.",
+    sections: [
+      {
+        id: "how-i-think-about-skills",
+        title: "How I think about skills",
+        html: `
+          <p>Skills are the lightweight playbooks I use with coding agents. I reach for them when a task has a repeatable shape: review this PR, challenge this plan, normalize these styles, or set up a project branch without losing the thread.</p>
+          <p>The best ones are boring. They do not try to be a second brain. They make one kind of work easier to repeat, and they make the acceptance criteria harder to skip.</p>
+        `,
+      },
+      {
+        id: "general-purpose-skills",
+        title: "General-purpose skills",
+        html: `
+          <p>Two skills are useful across almost any engineering task:</p>
+          <ul>
+            <li><strong>Grill me</strong> — a pressure-test before building. It is useful when I have an approach but want the weak assumptions challenged before code exists.</li>
+            <li><strong><a href="https://github.com/DietrichGebert/ponytail">Ponytail</a></strong> — a simplicity pass. It pushes toward deleting, inlining, or deferring anything that does not need to exist yet.</li>
+          </ul>
+          <p>I like these because they do not make the agent more ambitious. They make it more skeptical.</p>
+        `,
+      },
+      {
+        id: "custom-skills",
+        title: "Custom skills I keep using",
+        html: `
+          <p>I also have a few custom skills that grew out of repeated work patterns. I keep their detailed notes separate so this article stays readable:</p>
+          <ul>
+            <li><a href="/blog/agent-skill-peer-review">Peer review</a> — reviews a teammate's diff against the repository's own rules, not memory.</li>
+            <li><a href="/blog/agent-skill-token-normalization">Token normalization</a> — cleans migrated UI styles into the design/token system after visual parity.</li>
+            <li><a href="/blog/agent-skill-project-start">Project start</a> — turns a task into a ticket, branch, and implementation outline so the work starts with less drift.</li>
+          </ul>
+        `,
+      },
+      {
+        id: "what-makes-a-skill-useful",
+        title: "What makes a skill useful",
+        html: `
+          <p>The skills I keep are the ones that create a clear boundary. A review skill should not silently edit. A planning skill should not jump into implementation. A token cleanup skill should run after visual parity, not before.</p>
+          <p>That separation is the point. When the skill is small, I can tell whether it did its job.</p>
+        `,
+      },
+    ],
+  },
+  {
+    slug: "agent-skill-peer-review",
+    status: "published",
+    listed: false,
+    title: "Agent Skill: Peer Review",
+    description:
+      "A private linked note about a custom peer-review skill that reviews PRs against repository-specific rules.",
+    topic: "Agent skills",
+    publishedAt: "2025-08-20",
+    readingTime: "3 min read",
+    standfirst:
+      "A peer-review skill is useful when it treats the repository as the source of truth and requires evidence for every finding.",
+    takeaway:
+      "Good agent review is not a list of opinions. It is a small number of claims backed by repo rules, sibling code, or a check that actually ran.",
+    sections: [
+      {
+        id: "what-it-does",
+        title: "What it does",
+        html: `
+          <p>This skill reviews someone else's pull request. It first looks for the repository's own guidance: working agreements, contribution docs, local agent files, design notes, or sibling patterns.</p>
+          <p>Then it reviews the diff against that context. The important constraint is that every finding needs a receipt: a rule, a neighboring implementation, or a reproducible check.</p>
+        `,
+      },
+      {
+        id: "why-it-helps",
+        title: "Why it helps",
+        html: `
+          <p>It reduces two common review problems: generic advice and confident-but-wrong comments. The skill is intentionally read-only until comments are approved, so it stays a reviewer instead of becoming a surprise implementer.</p>
+        `,
+      },
+      {
+        id: "sanitized-skill-notes",
+        title: "Sanitized skill notes",
+        html: `
+          <p>This is the public version of the saved skill markdown. I removed machine paths, repository names, and private review references.</p>
+          <pre><code>name: peer-review
+purpose: Review another person's pull request using the repository's own rules.
+
+not for:
+  - silently editing the author's code
+  - reviewing from memory
+  - posting comments without approval
+
+workflow:
+  1. Find the repository guidance.
+     Look for working agreements, contribution docs, local agent files,
+     architecture docs, and nearby examples.
+
+  2. Read what the PR claims.
+     Review against the stated intent, not a different design preference.
+
+  3. Review in passes.
+     - conventions from the repo docs
+     - reuse of existing helpers, components, and patterns
+     - sibling consistency in nearby code
+     - correctness, empty states, boundaries, and failure paths
+
+  4. Verify before writing a finding.
+     A finding needs a receipt: a rule, sibling code, or a check that ran.
+
+  5. Ask before posting.
+     Draft review comments first; only post after explicit approval.</code></pre>
+        `,
+      },
+    ],
+  },
+  {
+    slug: "agent-skill-token-normalization",
+    status: "published",
+    listed: false,
+    title: "Agent Skill: Token Normalization",
+    description:
+      "A private linked note about cleaning migrated UI styles into a design-token system after visual parity.",
+    topic: "Agent skills",
+    publishedAt: "2025-08-20",
+    readingTime: "3 min read",
+    standfirst:
+      "Token cleanup is safest after the UI already matches. The goal is to replace arbitrary values with design-system primitives without changing the result.",
+    takeaway:
+      "Visual accuracy comes first. Tokenization is a cleanup pass, not a redesign pass.",
+    sections: [
+      {
+        id: "what-it-does",
+        title: "What it does",
+        html: `
+          <p>This skill reviews migrated UI code and colocated style files, then replaces arbitrary colors, spacing, typography, and sizing with the closest approved design tokens where safe.</p>
+          <p>It also checks whether a design-system primitive should replace custom markup. The goal is consistency with the token system, not clever refactoring.</p>
+        `,
+      },
+      {
+        id: "why-it-helps",
+        title: "Why it helps",
+        html: `
+          <p>During migration, raw values often appear because the first priority is visual parity. A separate token pass keeps that pragmatic implementation step from becoming permanent design debt.</p>
+        `,
+      },
+      {
+        id: "sanitized-skill-notes",
+        title: "Sanitized skill notes",
+        html: `
+          <p>This is the public version of the saved skill markdown. I replaced product, package, and repository names with generic placeholders.</p>
+          <pre><code>name: token-normalization
+purpose: Normalize migrated UI to design-system primitives and design tokens.
+
+when to run:
+  After visual parity is achieved, not before.
+
+priority order:
+  1. Preserve visual accuracy.
+  2. Prefer design-system primitives for common UI elements.
+  3. Prefer shared design tokens over raw values.
+  4. Keep custom values only when no safe token exists.
+
+checks:
+  - replace raw colors with approved color tokens
+  - replace spacing, sizing, typography, and borders with tokens where safe
+  - consolidate matching typography into text styles
+  - use token references consistently
+  - avoid redesigning during cleanup
+
+verification:
+  Re-check the UI after token changes so cleanup does not create visual drift.</code></pre>
+        `,
+      },
+    ],
+  },
+  {
+    slug: "agent-skill-project-start",
+    status: "published",
+    listed: false,
+    title: "Agent Skill: Project Start",
+    description:
+      "A private linked note about starting a task with a ticket, branch, and implementation outline.",
+    topic: "Agent skills",
+    publishedAt: "2025-08-20",
+    readingTime: "2 min read",
+    standfirst:
+      "Project-start automation is useful when it turns a loose task into a named branch, a short plan, and explicit next steps.",
+    takeaway:
+      "The value is not ceremony. It is reducing drift before implementation begins.",
+    sections: [
+      {
+        id: "what-it-does",
+        title: "What it does",
+        html: `
+          <p>This skill takes a task description or existing ticket and sets up the working lane: ticket context, branch naming, and a small implementation outline.</p>
+          <p>The public idea is simple: start with a stable reference and a branch that explains the work. Keep the operational details private and environment-specific.</p>
+        `,
+      },
+      {
+        id: "why-it-helps",
+        title: "Why it helps",
+        html: `
+          <p>It prevents the first half hour of a task from becoming scattered setup. It also makes handoff easier because the branch, task, and plan share the same intent.</p>
+        `,
+      },
+      {
+        id: "sanitized-skill-notes",
+        title: "Sanitized skill notes",
+        html: `
+          <p>This is the public version of the saved skill markdown. I replaced tracker names, project keys, branch conventions, and API details with placeholders.</p>
+          <pre><code>name: project-start
+purpose: Turn a task or existing ticket into a ready working lane.
+
+workflow:
+  1. Detect whether the prompt references an existing ticket.
+     - if yes, fetch or summarize its intent
+     - if no, draft a short ticket summary and description for approval
+
+  2. Create or confirm the work item.
+     Use the team's tracker and status flow.
+
+  3. Create a feature branch.
+     Suggested shape: [ticket-key]-[short-task-slug]
+
+  4. Suggest implementation changes.
+     - affected areas
+     - likely files
+     - data or API boundaries
+     - checks to run
+
+  5. Save a short plan.
+     Keep the plan close to the work so future sessions can resume safely.</code></pre>
+        `,
+      },
+    ],
+  },
   {
     slug: "ai-agent-component-migration",
     status: "draft",
@@ -126,7 +371,7 @@ limit: 10</code></pre>
     description:
       "A practical case study on several LLM-agent migration workflows I tried, what failed, and the smaller operating model that worked better.",
     topic: "AI-assisted engineering",
-    publishedAt: "2026-09-15",
+    publishedAt: "2025-08-01",
     readingTime: "12 min read",
     standfirst:
       "A large frontend migration became an experiment in agent architecture. I went in curious, broke a few of my own assumptions, and learned that the useful part was not a bigger prompt — it was bounded work, explicit evidence, and independent review.",
@@ -269,5 +514,9 @@ Implementation loop
 ] satisfies Post[];
 
 export const publishedPosts = posts.filter((post) => post.status === "published");
+
+export const listedPosts = publishedPosts
+  .filter((post) => post.listed !== false)
+  .sort((first, second) => first.publishedAt.localeCompare(second.publishedAt));
 
 export const getPost = (slug: string) => publishedPosts.find((post) => post.slug === slug);

@@ -41,6 +41,9 @@ export default defineConfig({
           hairline: { value: "1px" },
           focus: { value: "3px" },
         },
+        shadows: {
+          card: { value: "0 18px 45px rgba(36, 43, 39, 0.08)" },
+        },
       },
     },
   },

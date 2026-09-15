@@ -5,7 +5,7 @@ import Footer from "./components/footer";
 import Header from "./components/header";
 import { appShell } from "./layout.styles";
 import { defaultOgImage } from "@/content/seo";
-import { site } from "@/content/site";
+import { isIndexable, site } from "@/content/site";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  robots: isIndexable ? undefined : { index: false, follow: false },
   openGraph: {
     type: "website",
     url: "/",
@@ -51,15 +52,17 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <Script id="microsoft-clarity" strategy="afterInteractive">
-          {`
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "yik475ank8");
-          `}
-        </Script>
+        {isIndexable ? (
+          <Script id="microsoft-clarity" strategy="afterInteractive">
+            {`
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "yik475ank8");
+            `}
+          </Script>
+        ) : null}
       </body>
     </html>
   );

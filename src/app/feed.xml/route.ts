@@ -1,4 +1,4 @@
-import { publishedPosts } from "@/content/posts";
+import { listedPosts } from "@/content/posts";
 import { site } from "@/content/site";
 
 const escapeXml = (value: string) =>
@@ -10,7 +10,7 @@ const escapeXml = (value: string) =>
     .replace(/'/g, "&apos;");
 
 export function GET() {
-  const items = publishedPosts
+  const items = listedPosts
     .map((post) => {
       const url = `${site.origin}/blog/${post.slug}`;
 

@@ -14,7 +14,7 @@ export function ArticlesCarousel({ posts }: { posts: Post[] }) {
     if (!track) return;
 
     const offset = direction === "next" ? track.clientWidth * 0.85 : -track.clientWidth * 0.85;
-    track.scrollBy({ left: offset, behavior: "smooth" });
+    track.scrollBy({ left: offset });
   };
 
   return (

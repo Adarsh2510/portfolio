@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Adarsh Trivedi portfolio
 
-## Getting Started
+Personal portfolio built with Next.js App Router, TypeScript, and Panda CSS.
 
-First, run the development server:
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Useful checks:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm lint
+pnpm typecheck
+pnpm check:public-content
+pnpm build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Content publishing
 
-## Learn More
+Articles live in `src/content/posts.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+Required fields for each post:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `slug`
+- `status`: `published` or `draft`
+- `title`
+- `description`
+- `topic`
+- `publishedAt`
+- `readingTime`
+- `standfirst`
+- `takeaway`
+- `sections`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`publishedPosts` controls routable article pages. `listedPosts` controls the homepage writing rail, `/blog`, sitemap, and RSS.
 
-## Deploy on Vercel
+Use `listed: false` for linked supporting notes that should be reachable from another article but excluded from public listings and feeds. These pages also emit `noindex, follow` metadata.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Keep drafts as `status: "draft"`; drafts must not receive public routes, feed entries, or sitemap entries.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Production configuration
+
+The live domain is `https://adarshtrivedi.com`.
+
+No custom Vercel env vars are required for indexing or analytics. Vercel provides `VERCEL_ENV=production` for the production deployment; only then pages are indexable and Microsoft Clarity loads.
+
+Preview and local environments emit noindex metadata and `robots.txt` disallows crawling.

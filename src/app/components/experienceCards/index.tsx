@@ -3,27 +3,27 @@ import { experienceCard } from "./styles";
 import { TExperienceCard } from "./types";
 
 const ExperienceCard = (props: TExperienceCard) => {
-  const { SVGElement, url, role, date, experienceHighlights } = props;
+  const { SVGElement, company, role, href, date, highlights } = props;
   const styles = experienceCard();
   const logo = SVGElement ? <SVGElement /> : <span aria-hidden="true">•</span>;
 
   return (
     <article className={styles.root}>
       <div className={styles.header}>
-        {url ? (
-          <Link prefetch={false} href={url} target="_blank" rel="noreferrer" className={styles.logo} aria-label={role}>
+        {href ? (
+          <Link prefetch={false} href={href} target="_blank" rel="noreferrer" className={styles.logo} aria-label={company}>
             {logo}
           </Link>
         ) : (
           <div className={styles.logo}>{logo}</div>
         )}
-        <h3 className={styles.role}>{role}</h3>
+        <h3 className={styles.role}>{company} — {role}</h3>
         <p className={styles.date}>{date}</p>
       </div>
 
       <div className={styles.body}>
         <ul>
-          {experienceHighlights.map((highlight) => (
+          {highlights.map((highlight) => (
             <li key={highlight}>{highlight}</li>
           ))}
         </ul>

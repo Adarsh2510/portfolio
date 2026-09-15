@@ -1,12 +1,10 @@
+export const isIndexable = process.env.VERCEL_ENV === "production";
+
 export const site = {
   name: "Adarsh Trivedi",
-  shortName: "Adarsh",
   role: "Senior Frontend Engineer",
-  company: "Headout",
-  companyUrl: "https://www.headout.com/",
-  location: "Bengaluru, Karnataka, India",
   email: "adarsh25trivedi@gmail.com",
-  origin: "https://adarshtrivedi.com",
+  origin: process.env.NEXT_PUBLIC_SITE_ORIGIN ?? "https://adarshtrivedi.com",
   description:
     "Senior frontend engineer in Bengaluru, building accessible, performant web applications with React, Next.js, and TypeScript.",
   socialLinks: [

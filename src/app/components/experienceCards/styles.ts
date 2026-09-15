@@ -6,7 +6,8 @@ export const experienceCard = sva({
     root: {
       border: "hairline solid token(colors.divider)",
       borderRadius: "card",
-      bg: "rgba(255, 255, 255, 0.38)",
+      bg: "white",
+      boxShadow: "card",
       overflow: "hidden",
     },
     header: {

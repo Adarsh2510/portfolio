@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ArticlesCarousel } from "@/app/components/articlesCarousel";
-import { publishedPosts } from "@/content/posts";
+import { listedPosts } from "@/content/posts";
+import { defaultOgImage } from "@/content/seo";
+import { site } from "@/content/site";
 import { blogPage } from "./styles";
 
 export const metadata: Metadata = {
@@ -8,6 +10,20 @@ export const metadata: Metadata = {
   description: "Articles and notes from Adarsh Trivedi.",
   alternates: {
     canonical: "/blog",
+  },
+  openGraph: {
+    type: "website",
+    url: "/blog",
+    siteName: site.name,
+    title: `Writing — ${site.name}`,
+    description: "Articles and notes from Adarsh Trivedi.",
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Writing — ${site.name}`,
+    description: "Articles and notes from Adarsh Trivedi.",
+    images: [defaultOgImage.url],
   },
 };
 
@@ -24,7 +40,7 @@ export default function BlogPage() {
         Case studies and notes on frontend engineering, performance, migrations, and AI-assisted workflows.
       </p>
 
-      <ArticlesCarousel posts={publishedPosts} />
+      <ArticlesCarousel posts={listedPosts} />
     </section>
   );
 }

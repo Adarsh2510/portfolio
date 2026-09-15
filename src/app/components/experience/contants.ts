@@ -1,18 +1,11 @@
 import { CapgeminiLogo, HeadoutLogo, MorganLogo } from "assets/svgIcons/experiencesLogo";
-import { experience } from "@/content/portfolio";
+import type { experience } from "@/content/portfolio";
 
 const logoByCompany = {
-  "Travel marketplace": HeadoutLogo,
+  Headout: HeadoutLogo,
   "Capgemini ↔ Morgan Stanley": MorganLogo,
   Capgemini: CapgeminiLogo,
 } as const;
 
-export const EXPERIENCES_DATA = experience.map((item) => ({
-  SVGElement: item.company in logoByCompany ? logoByCompany[item.company as keyof typeof logoByCompany] : null,
-  url: "href" in item ? item.href : "",
-  role: `${item.company} — ${item.role}`,
-  date: item.date,
-  experienceHighlights: [...item.highlights],
-}));
-
-export default EXPERIENCES_DATA;
+export const getExperienceLogo = (company: (typeof experience)[number]["company"]) =>
+  company in logoByCompany ? logoByCompany[company as keyof typeof logoByCompany] : null;

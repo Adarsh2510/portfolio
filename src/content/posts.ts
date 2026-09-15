@@ -366,7 +366,7 @@ workflow:
   },
   {
     slug: "ai-agent-component-migration",
-    status: "draft",
+    status: "published",
     title: "What I Learned Trying to Automate a Frontend Migration",
     description:
       "A practical case study on several LLM-agent migration workflows I tried, what failed, and the smaller operating model that worked better.",

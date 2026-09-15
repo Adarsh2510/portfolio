@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArticlesCarousel } from "@/app/components/articlesCarousel";
+import Link from "next/link";
 import { listedPosts } from "@/content/posts";
 import { defaultOgImage } from "@/content/seo";
 import { site } from "@/content/site";
@@ -40,7 +40,17 @@ export default function BlogPage() {
         Case studies and notes on frontend engineering, performance, migrations, and AI-assisted workflows.
       </p>
 
-      <ArticlesCarousel posts={listedPosts} />
+      <div className={styles.grid}>
+        {listedPosts.map((post) => (
+          <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.card}>
+            <p className={styles.meta}>
+              {post.topic} · {post.readingTime}
+            </p>
+            <h2>{post.title}</h2>
+            <p>{post.description}</p>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import Footer from "./components/footer";
@@ -52,6 +53,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Analytics />
         {isIndexable ? (
           <Script id="microsoft-clarity" strategy="afterInteractive">
             {`

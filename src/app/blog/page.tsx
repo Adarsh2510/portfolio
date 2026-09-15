@@ -4,6 +4,13 @@ import { blogPage } from "./styles";
 export const metadata: Metadata = {
   title: "Writing",
   description: "Articles and notes from Adarsh Trivedi.",
+  alternates: {
+    canonical: "/blog",
+  },
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function BlogPage() {

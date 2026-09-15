@@ -3,6 +3,7 @@ import Banner from "./components/banner";
 import Experience from "./components/experience";
 import { homePage } from "./page.styles";
 import { selectedWork } from "@/content/portfolio";
+import { homeJsonLd, jsonLd } from "@/content/seo";
 import { site } from "@/content/site";
 
 export default function Home() {
@@ -10,6 +11,10 @@ export default function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(homeJsonLd) }}
+      />
       <Banner />
 
       <section id="work" className={styles.section} aria-labelledby="work-heading">

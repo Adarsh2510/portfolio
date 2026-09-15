@@ -3,9 +3,9 @@
 ## Purpose and current stage
 
 - Build Adarsh Trivedi's personal portfolio around frontend engineering, selected work, and learnings, including experiments with AI.
-- The user approved the Quiet Studio direction and two distinct layouts: a conventional portfolio homepage and an article/case-study layout with section navigation on the left and content on the right. See `docs/portfolio-revamp-plan.md`.
-- Resume-derived content and outstanding questions are in `docs/portfolio-content.md`. Use the supplied resume for current role, location, and experience; it supersedes older portfolio copy where they differ.
-- The build sequence, technical decisions, and acceptance checks are in `docs/implementation-plan.md`. The first visual milestone is the homepage and a separate article specimen, reviewed together.
+- The user approved the Quiet Studio direction and two distinct layouts: a conventional portfolio homepage and an article/case-study layout with section navigation on the left and content on the right.
+- Use the supplied resume and current `src/content/*` modules for role, location, selected work, and experience; newer content there supersedes older component copy.
+- First visual milestone: homepage plus a separate article specimen, reviewed together before publishing infrastructure.
 - Intended domain: `https://adarshtrivedi.com`. Domain ownership and production setup are not yet confirmed.
 
 ## Implementation principles
@@ -19,7 +19,7 @@
 ## Visual rules
 
 - Keep the design clean, minimal, and readable, with generous spacing and a clear type hierarchy.
-- Selected direction: off-white, dark ink, and restrained green; predominantly sans-serif typography. Working palette: background `#F7F8F5`, text `#242B27`, accent `#315949`, divider `#DDE2DA`, occasional annotation background `#E8EDCF`. Verify contrast and record implementation token paths when created.
+- Selected direction: off-white, dark ink, and restrained green; predominantly sans-serif typography. Theme tokens live in `panda.config.ts`: background `#F7F8F5`, text `#242B27`, accent `#315949`, divider `#DDE2DA`, occasional annotation background `#E8EDCF`.
 - Keep the shared top header/navigation. The homepage has a normal vertical flow and no left-side section menu. Do not apply the Anthropic article layout to the homepage.
 - Express personality through real work, natural copy, personal photography, and useful annotations. Do not add generic illustrations or simulated personal details to make the site appear authentic.
 - Use shared values for color, typography, spacing, content widths, borders, and focus styles. Articles must inherit the portfolio theme.
@@ -54,7 +54,7 @@
 
 ## Verification and publishing
 
-- Document the actual publishing commands and content template in the README when implemented.
+- Document the actual publishing commands and content template in the README when publishing is implemented.
 - For implementation changes, run relevant build, type, and lint checks using the repository's working scripts; update obsolete tooling when necessary.
 - Inspect home, writing index, and a representative article at mobile and desktop sizes. Check keyboard access, links, image layout, and code/table overflow.
 - Check generated metadata, JSON-LD, sitemap, feed, missing-page behavior, and draft exclusion when publishing infrastructure changes.

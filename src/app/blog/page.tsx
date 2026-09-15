@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { publishedPosts } from "@/content/posts";
 import { blogPage } from "./styles";
 
 export const metadata: Metadata = {
@@ -6,10 +8,6 @@ export const metadata: Metadata = {
   description: "Articles and notes from Adarsh Trivedi.",
   alternates: {
     canonical: "/blog",
-  },
-  robots: {
-    index: false,
-    follow: false,
   },
 };
 
@@ -20,11 +18,21 @@ export default function BlogPage() {
     <section className={styles.root} aria-labelledby="writing-heading">
       <p className={styles.eyebrow}>Writing</p>
       <h1 id="writing-heading" className={styles.title}>
-        Notes are coming soon.
+        Practical notes from the workbench.
       </h1>
       <p className={styles.body}>
-        I&apos;m setting up a static writing space for practical frontend notes, migration learnings, and AI experiments. Drafts stay unpublished until they are ready.
+        Case studies and notes on frontend engineering, performance, migrations, and AI-assisted workflows.
       </p>
+
+      <div className={styles.grid}>
+        {publishedPosts.map((post) => (
+          <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.card}>
+            <p className={styles.meta}>{post.topic} · {post.readingTime}</p>
+            <h2>{post.title}</h2>
+            <p>{post.description}</p>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }

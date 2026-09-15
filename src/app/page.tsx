@@ -3,6 +3,7 @@ import Banner from "./components/banner";
 import Experience from "./components/experience";
 import { homePage } from "./page.styles";
 import { selectedWork } from "@/content/portfolio";
+import { publishedPosts } from "@/content/posts";
 import { homeJsonLd, jsonLd } from "@/content/seo";
 import { site } from "@/content/site";
 
@@ -38,6 +39,23 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {publishedPosts.length > 0 ? (
+        <section className={styles.section} aria-labelledby="writing-heading">
+          <h2 id="writing-heading" className={styles.sectionTitle}>
+            Writing
+          </h2>
+          <div className={styles.writingRail} aria-label="Published articles">
+            {publishedPosts.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.writingCard}>
+                <p>{post.topic} · {post.readingTime}</p>
+                <h3>{post.title}</h3>
+                <p>{post.description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <Experience />
 
